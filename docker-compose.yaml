@@ -1,0 +1,36 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+    environment:
+      - discovery.type=single-node
+   
+
+    ports:
+      - 9200:9200
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.11.1
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:7.11.1
+    ports:
+      - 8200:8200
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - APM_ENABLED=true
+  postgres:
+    image: 'postgres'
+    ports:
+      - "5432:5432" 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword     
+
+volumes:
+  esdata1:
