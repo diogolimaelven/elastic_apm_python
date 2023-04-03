@@ -3,15 +3,16 @@ import psycopg
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 import logging
+from elasticapm.contrib.flask import ElasticAPM
 
 # ENVs
 load_dotenv()
 
+# Start Flask
+app = Flask(__name__)
+
 # APM Config
 
-
-
-app = Flask(__name__)
 @app.route("/")
 def test_db():
     try:
@@ -27,8 +28,9 @@ def test_db():
         return render_template('index.html', d_output=d_result)
     except psycopg.Error as err:
         # APM
+        
         response = {'message': 'Internal Server Error'}
         return jsonify(response), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug = 0 )
+    app.run(host='0.0.0.0', debug = 1 )

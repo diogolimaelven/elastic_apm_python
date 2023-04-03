@@ -41,5 +41,6 @@ python app.py
 ### Adicionando os logs no apm
 
 ```
+'DEBUG': True
 apm.capture_message(app.logger.critical(err), level='error')
 ```
