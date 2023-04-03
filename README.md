@@ -37,3 +37,9 @@ source ./bin/activate
 pip3 install --no-cache-dir -r requirements.txt
 python app.py
 ```
+
+### Adicionando os logs no apm
+
+```
+apm.capture_message(app.logger.critical(err), level='error')
+```
