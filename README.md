@@ -31,11 +31,14 @@ git clone <projeto>
 python3 -m venv .
 source ./bin/activate
 ```
+
 ### Instalando todas as dependencias 
 
 ```
 pip3 install --no-cache-dir -r requirements.txt
 python app.py
+
+
 ```
 
 ### Adicionando os logs no apm
@@ -43,4 +46,9 @@ python app.py
 ```
 'DEBUG': True
 apm.capture_message(app.logger.critical(err), level='error')
+```
+
+### Desativando venv
+```
+deactivate
 ```
